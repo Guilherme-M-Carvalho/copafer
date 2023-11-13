@@ -8,9 +8,9 @@ export class AddressEntity {
     @PrimaryGeneratedColumn('increment', { name: 'id' })
     id?: number
 
-    @Column("int", { name: 'cep', nullable: false, width: 8 })
+    @Column("varchar", { name: 'cep', nullable: false, length: 255 })
     cep: number;
-
+    
     @Column("varchar", { name: 'address', nullable: false, length: 255 })
     address: string;
 
@@ -26,7 +26,10 @@ export class AddressEntity {
     @Column("varchar", { name: 'uf', nullable: false, length: 255 })
     uf: string;
 
-    @OneToOne(() => StoreEntity, store => store.address)
+    @Column("int", { name: 'number', nullable: false, width: 8 })
+    number: number;
+
+    @OneToOne(() => StoreEntity, store => store.address, {cascade: ['insert', 'update'], nullable: true})
     store?: StoreEntity
 
     @Column("boolean", { name: 'deleted', nullable: false, default: false, select: true })

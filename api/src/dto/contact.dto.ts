@@ -4,10 +4,10 @@ export class ContactDto {
     handleCreate(props: CreateContactProps): CreateContactProps {
         const { ddi, telephone } = props
 
-        if(typeof ddi !== "number"){
+        if(typeof ddi !== "string"){
             throw new Error('{"field": "ddi"}')
         }
-        if(typeof telephone !== "number"){
+        if(typeof telephone !== "string"){
             throw new Error('{"field": "telephone"}')
         }
 
@@ -15,7 +15,7 @@ export class ContactDto {
             ddi,
             telephone
         }
-    }
+    }                 
 
     // handleFindOne(props: FindOneProps): FindOneProps{
     //     const { id } = props

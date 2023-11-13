@@ -1,0 +1,1 @@
+{"version":3,"file":"module_permission.js","sourceRoot":"","sources":["../../../src/seed/module_permission.ts"],"names":[],"mappings":";;;AAEA,wEAAkE;AAElE,MAAa,iBAAiB;IAC1B,KAAK,CAAC,GAAG,CAAC,UAAsB,EAAE,cAAoC;QAClE,MAAM,aAAa,GAAG,UAAU,CAAC,aAAa,CAAC,mCAAgB,CAAC,CAAC;QAEjE,MAAM,aAAa,CAAC,KAAK,CAAC;;;;gBAIlB,CAAC,CAAA;IACb,CAAC;CACJ;AAVD,8CAUC"}

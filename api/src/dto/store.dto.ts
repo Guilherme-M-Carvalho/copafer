@@ -1,4 +1,5 @@
-import { CreateStoreProps } from "../types/store"
+import { StoreEntity } from "../entity/store"
+import { CreateStoreProps, FindProps } from "../types/store"
 import { AddressDto } from "./address.dto"
 import { ContactDto } from "./contact.dto"
 
@@ -7,6 +8,14 @@ export class StoreDto {
         const { name, address, contact } = props
         if(typeof name !== "string"){
             throw new Error('{"field": "name"}')
+        }
+        
+        if(typeof address !== "object"){
+            throw new Error('{"field": "address"}')
+        }
+ 
+        if(!Array.isArray(contact)){
+            throw new Error('{"field": "contact"}')
         }
         
         const dtoAddress = new AddressDto()
@@ -24,15 +33,23 @@ export class StoreDto {
         }
     }
 
-    // handleFindOne(props: FindOneProps): FindOneProps{
-    //     const { id } = props
+    handleFindOne(props: StoreEntity[]): FindProps{
 
-    //     if(typeof id !== "number"){
-    //         throw new Error('{"field": "id"}')
-    //     }
-    //     return {
-    //         id
-    //     }
+        return props.map(store => {
+            let contact = ""
+            store.contact.forEach((con, i) => {
+                contact += `${i !== 0 ? ", ": ""}+${con.ddi} ${con.telephone}`
+            })
+            return {
+                id:store.id,
+                name: store.name,
+                address: store.address.address,
+                neighborhood: store.address.neighborhood,
+                uf: store.address.uf,
+                cep: String(store.address.cep),
+                contact
+            }
+        })
 
-    // }
+    }
 }

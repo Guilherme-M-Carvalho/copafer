@@ -13,6 +13,8 @@ export class CreateRepositoryStore implements CreateRepositoryStoreProps {
         try {
             return await StoreRepository.save(store)
         } catch (error) {
+            console.log({error, store});
+
             throw new Error('Internal error');
         }
     }
@@ -23,6 +25,8 @@ export class CreateRepositoryStore implements CreateRepositoryStoreProps {
                 where: { name: name }
             })
         } catch (error) {
+            console.log({error, name});
+            
             throw new Error('Internal error');
         }
     }

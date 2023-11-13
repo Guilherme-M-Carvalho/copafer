@@ -1,5 +1,5 @@
 import express, { NextFunction, Request, Response } from "express";
-// import 'express-async-errors';
+import 'express-async-errors';
 import cors from "cors";
 import Routes from "./routes";
 import cookieParser from "cookie-parser"
@@ -11,7 +11,8 @@ import { AppDataSource } from "./data-source";
 const app = express();
 app.use(cors());
 app.use(express.json());
-// app.use(cookieParser());
+app.use(express.urlencoded({ extended: true }))
+app.use(cookieParser());
 // app.use(session({
 //      secret: 'keyboard cat',
 //      cookie: {
@@ -20,11 +21,6 @@ app.use(express.json());
 //      resave: false,
 //      saveUninitialized: true,
 // }))
-
-app.post("/api/store", (req, res) => {
-     console.log(req.body);
-     
-})
 
 // app.use(session({
 //      secret: 'keyboard cat',
@@ -41,37 +37,36 @@ app.post("/api/store", (req, res) => {
 // )
 
 
-// new Routes().handler(app);
-// const pathReact = __dirname + '/views/';
-// app.use(express.static(pathReact));
-// app.get('*', function (req, res) {
-//      res.sendFile(pathReact + "index.html");
-// });
+new Routes().handler(app);
+const pathReact = __dirname + '/views/';
+app.use(express.static(pathReact));
+app.get('*', function (req, res) {
+     res.sendFile(pathReact + "index.html");
+});
 
-// app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-//      if (err instanceof Error) {
-//           console.log({err});
-//           try {
-//                // JSON.parse(err.message)
-//           } catch (error) {
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+     if (err instanceof Error) {
+          try {
+               JSON.parse(err.message)
+          } catch (error) {
                
-//                return res.status(400).json({
-//                     error: err.message
-//                });
-//           }
-//           return res.status(400).json(JSON.parse(err.message));
-//      }
+               return res.status(400).json({
+                    error: err.message
+               });
+          }
+          return res.status(400).json(JSON.parse(err.message));
+     }
 
-//      return res.status(500).json({
-//           status: 'error',
-//           message: "Internal server error"
-//      });
+     return res.status(500).json({
+          status: 'error',
+          message: "Internal server error"
+     });
 
-// });
+});
 
 AppDataSource.initialize().then(async () => {
      console.log('BD Conectado!');
-     app.listen(8081,
+     app.listen(80,
           () =>
                console.log("deu certo")
      );

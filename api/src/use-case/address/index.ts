@@ -10,12 +10,13 @@ export class Address implements AddressEntity {
     neighborhood: string
     locality: string
     uf: string
+    number: number;
     store?: StoreEntity
     deleted?: boolean
     createDate?: Date
     updateDate?: Date
 
-    constructor({ address, cep, complement, locality, neighborhood, uf, store, createDate, deleted, id, updateDate }: AddressEntity) {
+    constructor({ number, address, cep, complement, locality, neighborhood, uf, store, createDate, deleted, id, updateDate }: AddressEntity) {
         this.address = address
         this.cep = cep
         this.complement = complement
@@ -23,6 +24,7 @@ export class Address implements AddressEntity {
         this.neighborhood = neighborhood
         this.uf = uf
         this.store = store
+        this.number = number
         this.createDate = createDate
         this.deleted = deleted
         this.id = id
