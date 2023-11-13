@@ -26,7 +26,7 @@ export default function Main({ children }: { children: React.ReactNode }) {
             <CssBaseline />
             <AppBarMain />
             <DrawerMain />
-            <Box component="main" sx={{ flexGrow: 1, p: "16px", pl: 0, height: "100vh", background: "#ededed !important", width: (theme: Theme) => open ? "calc(100vw - 240px)" : `calc(100vw - ${theme.spacing(8)} + 17px)` }}>
+            <Box component="main" sx={{ flexGrow: 1, p: "16px", pl: 0, height: "100vh", background: "#ededed !important", width: (theme: Theme) => open ? "calc(100vw - 240px)" : `calc(100vw - ${theme.spacing(8)} - 17px)` }}>
                 <Box sx={{overflowY: "auto", background: "#FAFCFF",  width: '100%', display: "flex", flexDirection: "column", height: "100%", borderRadius: "16px", p:3, pt: 0 }} onClick={() => open && handleToggle()}>
                     <DrawerHeader />
                     {children}
